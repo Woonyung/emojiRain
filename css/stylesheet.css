@@ -1,0 +1,11 @@
+body{
+	cursor: crosshair;
+}
+
+#emoji{
+	/*position: absolute;*/
+	float: right;
+	widht: 100%;
+	background-color: pink;
+}
+
