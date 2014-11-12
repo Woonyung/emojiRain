@@ -1,11 +1,13 @@
 {
-    "name": "Emoji Test",
-    "version": "1.0",
+    "name": "Emoji Test_",
+    "version": "1.1",
     "manifest_version": 2,
     "description": "basic emoji test",
     "content_scripts": [
         {
             "matches": [
+                // "http://*/*", 
+                // "https://*/*",
                 "https://mail.google.com/mail/*"
             ],
             "js": [
