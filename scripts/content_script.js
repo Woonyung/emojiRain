@@ -11,10 +11,22 @@ $("document").ready(function(){
     //change cursor
     // $("body").css("cursor", "url('"+chrome.extension.getURL('glitter_cursor.gif')+"'), default");
 
-    // make new div element
+    // make new div element and assign id
     var emoji = document.createElement("div");
-    $(emoji).attr("id", "emoji"); // assign id of emoji
-   	emoji.innerHTML = "<img src='" + chrome.extension.getURL('icon.png')+"'>";
+    $(emoji).attr("id", "emoji")
+    		.html("<img src='" + chrome.extension.getURL('images/icon.png')+"'>");
+
+    // insert into body as first child
    	document.body.insertBefore(emoji, document.body.firstChild);
-   	
+
+
+   	// searching for the specific words..
+   	// it has to be run everytime user clicked new inbox item...
+   	var value = $('body').html(); 
+   	if (value.indexOf('goofy') > -1){
+   		console.log("I found the word");
+   	} else {
+   		console.log("I found nothing");
+   	}
+
 });
