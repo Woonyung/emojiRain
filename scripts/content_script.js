@@ -10,24 +10,14 @@ $("document").ready(function(){
 
   console.log("------------ Running from extension ---------- ");
     
-    //change cursor
-    // $("body").css("cursor", "url('"+chrome.extension.getURL('glitter_cursor.gif')+"'), default");
+  // checking words every 5 seconds
+  setInterval(searchingWords, 5000);
 
-    // make new div element and assign id
-    var emoji = document.createElement("div");
-    $(emoji).attr("id", "emoji")
-        .html("<img src='" + chrome.extension.getURL('images/icon.png')+"'>");
-
-    // insert into body as first child
-    document.body.insertBefore(emoji, document.body.firstChild);
-
-    // checking words every 5 seconds
-    setInterval(searchingWords, 5000);
-
-    ////
-    // when are we going to clear those out?...
-    clearInterval();
+  ////
+  // when are we going to clear those out?...
+  clearInterval();
 });
+
 
 function searchingWords(){
   // searching for the specific words
@@ -36,7 +26,13 @@ function searchingWords(){
   if( value !== undefined ){ // if a user enter to inbox
     if (value.indexOf('oops') > -1){
       console.log("I found the word");
+
+      // do something inside of the inbox 
+      $('.ii').css('background-color', 'yellow');
       $('.ii').append("<img src='" + chrome.extension.getURL('images/icon.png')+"'>");
+
+
+
     } else {
       console.log("I found nothing");
     }

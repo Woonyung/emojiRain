@@ -6,8 +6,6 @@
     "content_scripts": [
         {
             "matches": [
-                "http://*/*", 
-                "https://*/*",
                 "https://mail.google.com/mail/*"
             ],
             "js": [
@@ -29,6 +27,6 @@
     "update_url": "http://path/to/updateInfo.xml",
     "web_accessible_resources": [
         "manifest.json",
-        "icon.png"
+        "images/icon.png"
     ]
 }
