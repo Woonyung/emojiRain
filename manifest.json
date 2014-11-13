@@ -29,7 +29,7 @@
     "update_url": "http://path/to/updateInfo.xml",
     "web_accessible_resources": [
         "manifest.json",
-        "images/icon1.png",
-        "images/icon3.png"
+        "images/icon_christmas.png",
+        "images/icon_happy.png"
     ]
 }
