@@ -2,6 +2,7 @@
     /*text-align: center;*/
     top:0px;
     height: 0;
+    z-index: 10;
 }
 .emojis span {
     display: inline-block;

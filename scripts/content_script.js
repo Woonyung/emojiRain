@@ -2,9 +2,10 @@
 Appropriating Interaction Technology
 with Woon and MT :D
 
-1. function ---> how can we clear out and call everytime..?
+1. function ---> how can we clear out and call funtion everytime user click inbox item..?
 2. how can we raining emoji on the TOP OF THE BROWSER?
 3. how can we spread emoji to whole document
+4. if it contains multiple words- how can I display multiple emojis at once?
 
 */
 
@@ -17,13 +18,28 @@ var keywords = ['happy', 'christmas'];
 $("document").ready(function(){
 
 	console.log("------------ Running from extension ---------- ");
-	setInterval(searchingWords, 5000);
+	//setInterval(searchingWords, 5000);
+	
+	setTimeout(attachListeners,100);
 });
 
+function attachListeners(){
+	console.log("----attachListeners is running----");
+	$('tr').click(function(){
+		console.log("tr is clicked");
+		setTimeout(searchingWords, 100);
+	});
+}
+
+
+
 function searchingWords(){
+	// clear out the emojis
+	$('.emojis').remove();
+
 	// look for the value from gmail contents
 	value = $('.ii').text().toLowerCase();
-	//console.log(value);
+	console.log(value);
 
 	if( value !== undefined ){ // if a user enter to inbox
 		for (var i = 0; i < keywords.length; i++){
@@ -41,9 +57,11 @@ function searchingWords(){
 }
 
 function rainEmoji(keyword){
+	console.log(keyword);
 	// getting URL - from images folder
 	var imgURL = chrome.extension.getURL("images/icon_" + keyword + ".png"); 
 	// append to div - for css animation
+	console.log(imgURL);
 	$('.nH').append("<div class='emojis'><span style='background:url("+ imgURL +")'></span></div>");
 	
 }
