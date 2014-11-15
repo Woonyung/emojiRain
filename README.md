@@ -5,6 +5,8 @@
 
 * Google chrome extension that makes emojis fall off from your browser depends on the words in your browse. We hope it allows you to appreciate more exciting and happy feeling of feeds from your families/ friends/ etc.
 
+* It is case insensitive.
+
 * This project starts from the assignment for the class, [Appropriating Interaction Technology](https://github.com/lmccart/AppropriatingInteractionTechnologies)–taught by Kyle McDonald and Lauren McCarthy.
 
 
@@ -12,11 +14,11 @@
 which we are building it right now (we will keep adding words/ emojis)
 
 
-`happy:` :smile:
+`happy`: :smile:
 
-`christmas:` :santa:
+`christmas`: :santa:
 
-`halloween:` :jack_o_lantern:
+`halloween`: :jack_o_lantern:
 
 
 ##Next step
