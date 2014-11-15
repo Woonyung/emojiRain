@@ -4,8 +4,16 @@
     height: 0;
     z-index: 10;
 }
+.christmas {
+  display: block;
+}
+.happy {
+  display: block;
+}
+
 .emojis span {
     display: inline-block;
+    background-color: aqua;
     background-repeat:no-repeat;
     width: 30px;
     height: 30px;
