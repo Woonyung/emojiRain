@@ -11,11 +11,13 @@
 ## Cheat sheet
 which we are building it right now (we will keep adding words/ emojis)
 
-```
-happy: :smile:
-christmas: :santa:
-halloween: :jack_o_lantern:
-```
+
+`happy:` :smile:
+
+`christmas:` :santa:
+
+`halloween:` :jack_o_lantern:
+
 
 ##Next step
 * definately fix css animations
