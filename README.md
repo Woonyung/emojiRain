@@ -3,7 +3,9 @@
 
 :ghost:
 
-* Google chrome extension that makes emojis fall off from your browser depends on the words in your browse. We hope it allows you to appreciate more exciting and happy feeling of feeds from your families/ friends/ etc.
+* Google chrome extension that makes emojis fall off from your browser depends on the words in your facebook chatting window. 
+
+* It originally started from grabbing contents from gmail inbox, but we thought personal conversations are happened more often in personal spaces– such as gmail chat, facebook feeds or facebook chat. We hope it allows you to appreciate more exciting and happy feeling of feeds from your families/ friends/ etc.
 
 * It is case insensitive.
 
@@ -14,17 +16,17 @@
 which we are building it right now (we will keep adding words/ emojis)
 
 
-`happy`: :smile:
+`happy` : :smile:
 
-`christmas`: :santa:
+`christmas` : :santa:
 
-`halloween`: :jack_o_lantern:
+`halloween` : :jack_o_lantern:
 
 
 ##Next step
 * definately fix css animations
 * able to make display multiple emojis if it contains multiple words 
-* expand to facebook feeds
+* (later) pop up window to control animation..?
 
 
 ##Who Made this
