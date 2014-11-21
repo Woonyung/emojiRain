@@ -18,7 +18,7 @@ var valueForGchat;
 var word;
 var intervalID  = 0;
 // keywords - that is going to be matched with 
-var keywords = ['happy', 'christmas'];
+var keywords = ['birthday', 'christmas', 'halloween'];
 
 //{ 'data-reactid':length of chats }
 var chatIDs = {};
@@ -58,7 +58,7 @@ function searchingWords(){
 		var numMessages = allConvesation[i].children.length;
 		// get the newsest message
 		var newestMessage = allConvesation[i].children[numMessages-1].innerText;
-		
+
 		// is this a new chat
 		if(currentID in chatIDs){
 
@@ -67,13 +67,15 @@ function searchingWords(){
 			if(numMessages > chatIDs[currentID]){
 				console.log("More conversation in chat : " + newestMessage);
 				chatIDs[currentID] = numMessages;
-				var words = newestMessage.split(' ');
+				// split with white space OR carrige return OR enter
+				var words = newestMessage.split(/\s|\n|\r{1,}/g);
 				
-				words[words.length -1].replace(/\n|\r+/g, '');
 				console.log(words);
 				
-				if($.inArray('happy', words) !== -1){
-					rainEmoji('happy',currentID);
+				for ( var i = 0; i < keywords.length; i++){
+					if($.inArray(keywords[i], words) !== -1){
+						rainEmoji(keywords[i],currentID);
+					}
 				}
 
 			}
@@ -104,7 +106,7 @@ function rainEmoji(keyword,id){
 	
 	// $(id).append("<div style='margin-left:" + 100 + "px; margin-top:"+ 100 + "px;' class='emojis " + keyword + "'><span style='background:url("+ imgURL +")'></span></div>");
 	// Randomly assign value 
-	for (var i = 0; i < 15; i++){
+	for (var i = 0; i < 30; i++){
 		var x = Math.round(Math.random() * 900)-20;
 		var y = Math.round(Math.random() * 10);
 		// $('.conversation').append("<div style='margin-left:" + x + "px; margin-top:"+ y + "px;' class='emojis " + keyword + "'><span style='background:url("+ imgURL +")'></span></div>");
