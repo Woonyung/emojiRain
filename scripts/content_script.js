@@ -2,14 +2,12 @@
 Appropriating Interaction Technology
 with Woon and MT :D
 
-what if we change those on the facebook feed?...
-
-
 later we are going to add function for g-chat as well
 // look for g-chat
 // valueForGchat = $("div[role='log']").text().toLowerCase();
 // console.log(valueForGchat);
 
+TEST WITH FACEBOOK CHAT BIG WINDOW
 */
 
 var valueForFacebook;
@@ -20,8 +18,13 @@ var intervalID  = 0;
 // keywords - that is going to be matched with 
 var keywords = ['birthday', 'christmas', 'halloween'];
 
+
+///// OBJECT FOR SMALL WINDOWS /////
 //{ 'data-reactid':length of chats }
-var chatIDs = {};
+var chatIDSmall = {};
+
+///// OBJECT FOR BIG WINDOW /////
+var chatIDBig = {};
 
 
 //------------------DOC READY-------------------//
@@ -38,77 +41,117 @@ function attachListeners(){
 	console.log("----attachListeners is running----");
 	// setTimeout(searchingWords, 2000);
 
-	intervalID = setInterval(searchingWords, 2000);
-
-
+	intervalID = setInterval(searchingWords, 3000);
 }
+
 
 function searchingWords(){
 	// clear out the emojis
 	$('.emojis').remove();
 
+	//////////////////////////////////////////////////
+	// SMALL CHAT WINDOW
+	/////////////////////////////////////////////////
+	
 	// checking all conversation class's children
-	var allConvesation = $('.conversation').children();
+	var allConvesationSmall = $('.conversation').children();
 	
 	//looping through chat windows
-	for (var i = 0; i < allConvesation.length; i++) {
-		// console.log(allConvesation[i].getAttribute('data-reactid')); // <div data-reactid='1.f'>...</div>
+	for (var i = 0; i < allConvesationSmall.length; i++) {
+		// console.log(allConvesationSmall[i].getAttribute('data-reactid')); // <div data-reactid='1.f'>...</div>
 
-		var currentID = allConvesation[i].getAttribute('data-reactid');
-		var numMessages = allConvesation[i].children.length;
+		var currentIDSmall = allConvesationSmall[i].getAttribute('data-reactid');
+		var numMessagesSmall = allConvesationSmall[i].children.length;
 		// get the newsest message
-		var newestMessage = allConvesation[i].children[numMessages-1].innerText;
+		var newestMessageSmall = allConvesationSmall[i].children[numMessagesSmall-1].innerText;
 
 		// is this a new chat
-		if(currentID in chatIDs){
+		if(currentIDSmall in chatIDSmall){
 
 			// we already have this object so now need to check the num of messages
-			// console.log("More conversation in chat : " + currentID);
-			if(numMessages > chatIDs[currentID]){
-				console.log("More conversation in chat : " + newestMessage);
-				chatIDs[currentID] = numMessages;
+			// console.log("More conversation in chat : " + currentIDSmall);
+			if(numMessagesSmall > chatIDSmall[currentIDSmall]){
+				console.log("More conversation in chat : " + newestMessageSmall);
+				chatIDSmall[currentIDSmall] = numMessagesSmall;
 				// split with white space OR carrige return OR enter
-				var words = newestMessage.split(/\s|\n|\r{1,}/g);
+				var wordSmall = newestMessageSmall.split(/\s|\n|\r{1,}/g);
 				
-				console.log(words);
+				console.log(wordSmall);
 				
 				for ( var i = 0; i < keywords.length; i++){
-					if($.inArray(keywords[i], words) !== -1){
-						rainEmoji(keywords[i],currentID);
+					if($.inArray(keywords[i], wordSmall) !== -1){
+						rainEmojiSmall(keywords[i],currentIDSmall);
 					}
 				}
 
 			}
 			// else{
 			// 	console.log("No new conversation");
-			// 	console.log(chatIDs[currentID]+" : "+numMessages);
+			// 	console.log(chatIDSmall[currentIDSmall]+" : "+numMessages);
 			// }
 		}
 		else{
 			//This is what happens when a new chat is started
 			// New Object!! Lets add it to the object
-			chatIDs[currentID] = numMessages ;
-			console.log("Chat added!");
-			console.log(chatIDs);
+			chatIDSmall[currentIDSmall] = numMessagesSmall ;
+			console.log("Chat added! -- Small");
+			console.log(chatIDSmall);
 			
 		}
 	};
+
+	//////////////////////////////////////////////////
+	// BIG CHAT WINDOW
+	/////////////////////////////////////////////////
+
+	// var allConvesationBig = $('[aria-label="Message thread contents"]').children();
+	// console.log(allConvesationBig[0].childNodes[3]);
+
+	// Checking all children
+	var allConvesationBig = $('#webMessengerRecentMessages');
+	var currentIDBig = allConvesationBig[0].lastChild.id;
+	// console.log(currentIDBig); //works
+
+	var numMessagesBig = allConvesationBig[0].childElementCount;
+	console.log(allConvesationBig);
+
+	// // if chat has new messages
+	// if(numMessagesBig > chatIDBig[currentIDBig]){
+	// 	chatIDBig[currentIDBig] = numMessagesBig;
+
+	// 	// get all children nodes
+	// 	var messagesBig = allConvesationBig[0].childNodes;
+	// 	var newestMessageBig = messagesBig[messagesBig.length-1].innerText; // last children node
+	// 	console.log(newestMessageBig.split(/\s|\n|\r{1,}/g));
+
+	// } else {
+	// 	chatIDBig[currentIDBig] = numMessagesBig;
+	// 	console.log("Chat added! -- Big");
+	// 	console.log(chatIDBig);
+	// }
+
+
+	// console.log(newestMessageBig);
+
 }
 
-function rainEmoji(keyword,id){
+
+
+function rainEmojiSmall(keyword,id){
 	console.log(keyword);
 	// getting URL - from images folder
 	var imgURL = chrome.extension.getURL("images/icon_" + keyword + ".png"); 
 	// append to div - for css animation
 	console.log(imgURL);
-	console.log($("[data-reactid="+'\"'+id+'\"'+"]"));
+	//console.log(id);
+	console.log($("[data-reactid="+'\"'+id+'\"'+"]")); // getting data-react attribute
 
 	
 	// $(id).append("<div style='margin-left:" + 100 + "px; margin-top:"+ 100 + "px;' class='emojis " + keyword + "'><span style='background:url("+ imgURL +")'></span></div>");
 	// Randomly assign value 
 	for (var i = 0; i < 30; i++){
 		var x = Math.round(Math.random() * 900)-20;
-		var y = Math.round(Math.random() * 10);
+		var y = Math.round(Math.random() * 5);
 		// $('.conversation').append("<div style='margin-left:" + x + "px; margin-top:"+ y + "px;' class='emojis " + keyword + "'><span style='background:url("+ imgURL +")'></span></div>");
 		$("[data-reactid="+'\"'+id+'\"'+"]").append("<div style='margin-left:" 
 													+ x + "px; margin-top:"+ y + "px;' class='emojis "
