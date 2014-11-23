@@ -46,92 +46,74 @@ function attachListeners(){
 
 
 function searchingWords(){
-	// clear out the emojis
+	// clear out the emojis first
 	$('.emojis').remove();
 
-	//////////////////////////////////////////////////
-	// SMALL CHAT WINDOW
-	/////////////////////////////////////////////////
+	// check if user is using small or big window
+	if($('#webMessengerRecentMessages')[0] == undefined ){ 
+
+		///////////////////////////////////////////////
+		/// SMALL WINDOW
+		///////////////////////////////////////////////
+
+		console.log("---you are using small window---");
+
+		// checking all conversation class's children
+		var allConvesationSmall = $('.conversation').children();
+		
+		//looping through chat windows
+		for (var i = 0; i < allConvesationSmall.length; i++) {
+			// console.log(allConvesationSmall[i].getAttribute('data-reactid')); // <div data-reactid='1.f'>...</div>
 	
-	// checking all conversation class's children
-	var allConvesationSmall = $('.conversation').children();
+			var currentIDSmall = allConvesationSmall[i].getAttribute('data-reactid');
+			var numMessagesSmall = allConvesationSmall[i].children.length;
+			// get the newsest message
+			var newestMessageSmall = allConvesationSmall[i].children[numMessagesSmall-1].innerText.toLowerCase();
 	
-	//looping through chat windows
-	for (var i = 0; i < allConvesationSmall.length; i++) {
-		// console.log(allConvesationSmall[i].getAttribute('data-reactid')); // <div data-reactid='1.f'>...</div>
-
-		var currentIDSmall = allConvesationSmall[i].getAttribute('data-reactid');
-		var numMessagesSmall = allConvesationSmall[i].children.length;
-		// get the newsest message
-		var newestMessageSmall = allConvesationSmall[i].children[numMessagesSmall-1].innerText;
-
-		// is this a new chat
-		if(currentIDSmall in chatIDSmall){
-
-			// we already have this object so now need to check the num of messages
-			// console.log("More conversation in chat : " + currentIDSmall);
-			if(numMessagesSmall > chatIDSmall[currentIDSmall]){
-				console.log("More conversation in chat : " + newestMessageSmall);
-				chatIDSmall[currentIDSmall] = numMessagesSmall;
-				// split with white space OR carrige return OR enter
-				var wordSmall = newestMessageSmall.split(/\s|\n|\r{1,}/g);
-				
-				console.log(wordSmall);
-				
-				for ( var i = 0; i < keywords.length; i++){
-					if($.inArray(keywords[i], wordSmall) !== -1){
-						rainEmojiSmall(keywords[i],currentIDSmall);
+			// is this a new chat
+			if(currentIDSmall in chatIDSmall){
+	
+				// we already have this object so now need to check the num of messages
+				// console.log("More conversation in chat : " + currentIDSmall);
+				if(numMessagesSmall > chatIDSmall[currentIDSmall]){
+					console.log("More conversation in chat : " + newestMessageSmall);
+					chatIDSmall[currentIDSmall] = numMessagesSmall;
+					// split with white space OR carrige return OR enter
+					var wordSmall = newestMessageSmall.split(/\s|\n|\r{1,}/g);
+					
+					console.log(wordSmall);
+					
+					for ( var i = 0; i < keywords.length; i++){
+						if($.inArray(keywords[i], wordSmall) !== -1){
+							rainEmojiSmall(keywords[i],currentIDSmall);
+						}
 					}
+	
 				}
+				// else{
+				// 	console.log("No new conversation");
+				// 	console.log(chatIDSmall[currentIDSmall]+" : "+numMessages);
+				// }
+				}
+				else{
+					// This is what happens when a new chat is started
+					// New Object!! Lets add it to the object
+					chatIDSmall[currentIDSmall] = numMessagesSmall ;
+					console.log("Chat added! -- Small");
+					console.log(chatIDSmall);			
+				}
+		};
 
-			}
-			// else{
-			// 	console.log("No new conversation");
-			// 	console.log(chatIDSmall[currentIDSmall]+" : "+numMessages);
-			// }
-		}
-		else{
-			//This is what happens when a new chat is started
-			// New Object!! Lets add it to the object
-			chatIDSmall[currentIDSmall] = numMessagesSmall ;
-			console.log("Chat added! -- Small");
-			console.log(chatIDSmall);
-			
-		}
-	};
+	} else { 
 
-	//////////////////////////////////////////////////
-	// BIG CHAT WINDOW
-	/////////////////////////////////////////////////
+		///////////////////////////////////////////////
+		/// BIG WINDOW
+		///////////////////////////////////////////////
 
-	// var allConvesationBig = $('[aria-label="Message thread contents"]').children();
-	// console.log(allConvesationBig[0].childNodes[3]);
-
-	// Checking all children
-	var allConvesationBig = $('#webMessengerRecentMessages');
-	var currentIDBig = allConvesationBig[0].lastChild.id;
-	// console.log(currentIDBig); //works
-
-	var numMessagesBig = allConvesationBig[0].childElementCount;
-	console.log(allConvesationBig);
-
-	// // if chat has new messages
-	// if(numMessagesBig > chatIDBig[currentIDBig]){
-	// 	chatIDBig[currentIDBig] = numMessagesBig;
-
-	// 	// get all children nodes
-	// 	var messagesBig = allConvesationBig[0].childNodes;
-	// 	var newestMessageBig = messagesBig[messagesBig.length-1].innerText; // last children node
-	// 	console.log(newestMessageBig.split(/\s|\n|\r{1,}/g));
-
-	// } else {
-	// 	chatIDBig[currentIDBig] = numMessagesBig;
-	// 	console.log("Chat added! -- Big");
-	// 	console.log(chatIDBig);
-	// }
-
-
-	// console.log(newestMessageBig);
+		console.log("---you are using big window---")
+		var allConvesationBig = $('#webMessengerRecentMessages');
+		console.log(allConvesationBig);
+	}
 
 }
 
