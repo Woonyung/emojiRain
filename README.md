@@ -16,7 +16,7 @@
 which we are building it right now (we will keep adding words/ emojis)
 
 
-`happy` : :smile:
+`birthday` : :birthday:
 
 `christmas` : :santa:
 
